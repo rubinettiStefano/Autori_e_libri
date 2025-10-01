@@ -34,8 +34,8 @@ public class Author extends BaseEntity
     {
         int sommaStock = 0;
         for(Book b : books)
-            sommaStock += b.getNCopies();
-
+            if(b.isInStock())
+                sommaStock++;
         return sommaStock;
     }
 
