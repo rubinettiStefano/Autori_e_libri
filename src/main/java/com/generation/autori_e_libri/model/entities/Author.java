@@ -56,12 +56,6 @@ public class Author extends BaseEntity
     public void addBook(Book b)
     {
         books.add(b);
-
-    }
-
-    public void addBook(Book b)
-    {
-        books.add(b);
         b.setAuthor(this);
     }
 
