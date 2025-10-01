@@ -1,31 +1,48 @@
 package com.generation.autori_e_libri.model.entities;
 
-import java.util.ArrayList;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-//TODO 2 - Annotare qui Author
-public class Author
+@Getter
+@Setter
+@Entity
+public class Author extends BaseEntity
 {
 
-    //TODO 3 - Creare proprietà
+    private String fullName;
+    private LocalDate dob;
+    private String nationality;
 
-    //TODO 4 - Impostare relazione
     //la cascade deve essere ALL
+    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Book> books = new HashSet<>();
 
-    //TODO 5 - Creare metodi
     public int numbersOfBooks()
     {
-        return 0;
+        return books.size();
     }
 
     public int numbersOfBooksInStocks()
     {
-        return 0;
+        int sommaStock = 0;
+        for(Book b : books)
+            sommaStock += b.getNCopies();
+
+        return sommaStock;
     }
 
-
+    public void addBook(Book b)
+    {
+        books.add(b);
+        b.setAuthor(this);
+    }
 
 }
