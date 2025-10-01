@@ -30,7 +30,7 @@ public class Author extends BaseEntity
     @NotBlank@NotNull
     private String nationality;
 
-
+    //TODO 3 - Creare proprietà
 
     //TODO 4 - Impostare relazione
     //la cascade deve essere ALL
@@ -59,6 +59,10 @@ public class Author extends BaseEntity
 
     }
 
-
+    public void addBook(Book b)
+    {
+        books.add(b);
+        b.setAuthor(this);
+    }
 
 }

@@ -1,8 +1,6 @@
 package com.generation.autori_e_libri.model.entities;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
