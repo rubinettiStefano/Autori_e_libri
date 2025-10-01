@@ -52,8 +52,6 @@ public class BookService
 
         Book b = op.get();
 
-        if (b.isInStock())
-            throw new IllegalArgumentException("Non è possibile cancellare libri ancora in stock");
 
         bRepo.delete(b);
     }
