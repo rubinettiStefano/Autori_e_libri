@@ -50,7 +50,7 @@ public class BookService
         Book b = op.get();
 
 
-        bRepo.delete(b);
+        bRepo.cancellaPerFavore(b.getId());
     }
 
     private OutputBookDto convertToOutput(Book e)
