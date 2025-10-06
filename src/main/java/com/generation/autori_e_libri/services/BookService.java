@@ -5,6 +5,7 @@ import com.generation.autori_e_libri.model.dtos.OutputBookDto;
 import com.generation.autori_e_libri.model.entities.Book;
 import com.generation.autori_e_libri.model.repositories.AuthorRepository;
 import com.generation.autori_e_libri.model.repositories.BookRepository;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,8 @@ public class BookService
     //TODO 8 completare corpo tutti metodi
 
     //lettura convertita
+
+
     public List<OutputBookDto> findAllBooksAsDtos()
     {
         List<Book> books= bRepo.findAll();
@@ -34,10 +37,21 @@ public class BookService
     }
 
     //scrittura convertita
-    public OutputBookDto save(InputBookDto dto)
+
+    /**
+     * This method receives a <b style="color:red">InputDto</b>  <br/>
+     * <img height=100 src="https://www.topolino.it/wp-content/uploads/2019/11/Paperino_360_ok.png">
+     * save the book created converting that input in an Entity,
+     * then convert the entity in an OutputDto to return
+     * @param dto A dto obtained in the controller converting a JSON body request
+     * @return OutputDto of the saved book
+     * @throws ConstraintViolationException If the fields of the dto are not compatible with the validation described in the entity
+     * @throws NoSuchElementException If the id of the author isn't present in the database
+     */
+    public OutputBookDto save(InputBookDto dto) throws ConstraintViolationException,NoSuchElementException
     {
         Book b = convertToEntity(dto);
-        b=bRepo.save(b);
+        b=bRepo.save(b);//save the book in the db and refresh b
 
         return convertToOutput(b);
     }
